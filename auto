@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tbilisuri RP Authorization</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;700&display=swap');
+
+        body { 
+            background: rgba(0,0,0,0.6); 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+            overflow: hidden;
+            color: white; 
+            font-family: 'Noto Sans Georgian', sans-serif; 
+        }
+        .login-box { 
+            background: #1a1a1a; 
+            padding: 40px; 
+            border-radius: 15px; 
+            border-bottom: 4px solid #ed1c24; 
+            text-align: center;
+            box-shadow: 0px 0px 30px rgba(0,0,0,0.7);
+            width: 320px;
+        }
+        h2 { 
+            color: #ed1c24; 
+            margin-bottom: 25px; 
+            text-transform: uppercase;
+        }
+        input { 
+            display: block; 
+            margin: 20px auto; 
+            padding: 12px; 
+            width: 90%; 
+            border-radius: 5px; 
+            border: 1px solid #333; 
+            background: #222;
+            color: white;
+            font-family: 'Noto Sans Georgian', sans-serif;
+            outline: none;
+            transition: 0.3s;
+            text-align: center;
+        }
+        input:focus {
+            border-color: #ed1c24;
+        }
+        button { 
+            background: #ed1c24; 
+            color: white; 
+            padding: 12px 0; 
+            width: 95%;
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 16px;
+            font-family: 'Noto Sans Georgian', sans-serif; 
+            transition: 0.3s;
+        }
+        button:hover { 
+            background: white; 
+            color: #ed1c24; 
+        }
+        .footer-text {
+            margin-top: 20px; 
+            font-size: 11px; 
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h2>ავტორიზაცია</h2>
+        <input type="password" id="password" placeholder="შეიყვანეთ პაროლი" autofocus>
+        <button onclick="sendLogin()">შესვლა</button>
+        <p class="footer-text">Tbilisuri RolePlay — მხოლოდ პაროლია საჭირო</p>
+    </div>
+
+    <script>
+        function sendLogin() {
+            const pass = document.getElementById('password').value;
+
+            if (pass.length < 1) return;
+
+            if (typeof cef !== 'undefined') {
+                cef.emit("onLoginAttempt", pass);
+            }
+        }
+
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendLogin();
+            }
+        });
+    </script>
+</body>
+</html>
